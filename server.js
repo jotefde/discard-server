@@ -17,11 +17,9 @@ const io = socket(server);
 
 io.on("connection", (socket) => {
     socket.emit("init",content);
-    socket.on("newChar", ({ char, pos }) => {
-        content = [content.slice(0, pos), char, content.slice(pos)].join('');
-        //console.log(content);
-        socket.broadcast.emit("processChar", { char, pos });
-        console.log("newChar: ",char);
+    socket.on("newString", ({ string, pos }) => {
+        content = [content.slice(0, pos), string, content.slice(pos)].join('');
+        socket.broadcast.emit("processString", { string , pos });
     });
 });
 
